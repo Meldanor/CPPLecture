@@ -13,8 +13,8 @@ namespace Collections
 	protected:
 		unsigned int m_numElements;
 
-		// QUESTION: What is the effect of the protected?
 		ICollection() : m_numElements(0)	{}
+		// TODO: Copyconstructor?
 
 	public:
 		/// \brief Implementation of a destructor to remove everything
@@ -39,6 +39,8 @@ namespace Collections
 			/// \brief Access the current element without changing the iterator
 			///
 			virtual IElement* current() const = 0;
+
+			virtual ~IIterator();
 		};
 
 		/// \brief Creates a one-time iterator.

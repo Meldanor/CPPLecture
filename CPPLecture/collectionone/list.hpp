@@ -1,35 +1,48 @@
 #pragma once
 
-// QUESTION: can the following line be replaced with class
-// ICollection predeclaration?
 #include "collection.hpp"
 
-namespace Collections {
-    class SingleLinkedList : public ICollection {
+namespace Collections
+{
+	class SingleLinkedList: public ICollection
+	{
+		struct ListEntry
+		{
+			ListEntry* next;
+			IElement* data;
 
-    public:
-        // Empty constructor
-        SingleLinkedList() : ICollection() , node(nullptr) {}
+			ListEntry( ListEntry* next, IElement* data ) : next(next), data(data)		{}
+			~ListEntry()	{ delete data; }
+		};
 
-        void insert( const IElement& newElement );
+		ListEntry* m_first;
+	public:
+		SingleLinkedList() : m_first(nullptr)		{}
+		// TODO: Copyconstructor
 
-        bool isEmpty();
+		~SingleLinkedList();
 
-        IIterator* getIterator() const;
+		/// \brief Inserts elements at the front of the list.
+		///
+		virtual void insert( const IElement& newElement ) override;
 
-    private:
+		class ListIterator: public IIterator
+		{
+			ListEntry* m_current;
+		public:
+			ListIterator( ListEntry* start ) : m_current(start)		{}
 
-        class Node {
-        public:
-            Node* next;
-            IElement* element;
+			/// \brief Goes to the next element in the collection.
+			/// \return The next/new element or nullptr at the end.
+			virtual IElement* next() override;
 
-            Node(const IElement& element) : element(element.clone()) {};
-            Node(Node* next, const IElement& element) : next(next), element(element.clone()) {};
-        };
+			/// \brief Access the current element without changing the iterator
+			///
+			virtual IElement* current() const override;
+		};
 
-        Node *node;
-    };
-
-
-}
+		/// \brief Creates a one-time iterator.
+		///
+		virtual IIterator* getIterator() const override;
+	};
+};

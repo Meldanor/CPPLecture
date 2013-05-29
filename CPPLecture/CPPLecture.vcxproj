@@ -78,11 +78,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="collectionone\arraylist.cpp" />
     <ClCompile Include="collectionone\duck.cpp" />
     <ClCompile Include="collectionone\list.cpp" />
     <ClCompile Include="collectionone\program.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="collectionone\arraylist.hpp" />
     <ClInclude Include="collectionone\collection.hpp" />
     <ClInclude Include="collectionone\duck.hpp" />
     <ClInclude Include="collectionone\element.hpp" />

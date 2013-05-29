@@ -24,6 +24,9 @@
     <ClCompile Include="collectionone\program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="collectionone\arraylist.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collectionone\collection.hpp">
@@ -36,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="collectionone\list.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collectionone\arraylist.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

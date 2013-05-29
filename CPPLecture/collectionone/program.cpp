@@ -1,27 +1,8 @@
 #include <iostream>
 
+#include "arraylist.hpp"
 #include "list.hpp"
 #include "duck.hpp"
-
-/// \brief Copies objects between arbitrary collections.
-/// \details This is an example test method - don't ask why to copy each second
-///		element.
-/// \param [in] input The original collection from which objects should be
-///		copied.
-/// \param [out] output An existing collection. If the collection already
-///		contains elements the ones from the input are added and the old remain.
-void copyEverySecondObject(const Collections::ICollection& input, Collections::ICollection& output)
-{
-	auto it = input.getIterator();
-	while(it->current())
-	{
-		output.insert(*it->current());
-		// Up to two steps (at least one)
-		if(it->next()) it->next();
-	}
-	delete it;
-}
-
 
 void outputDucks(const Collections::ICollection& duckcollection)
 {
@@ -35,28 +16,37 @@ void outputDucks(const Collections::ICollection& duckcollection)
 	delete it;
 }
 
-
 int main()
 {
-	Duck duckChild("quack");
-	Duck duckMother("QUACKQUACKQUACK");
+	Duck linkedListDuck("quack->quack");
+	Duck arrayDuck("quackquack");
 
 	// add ducks
-	Collections::SingleLinkedList duckList;
+	Collections::SingleLinkedList singleLinkedList;
 	for( int i=0; i<5; ++i )
-		duckList.insert( duckChild );
-	duckList.insert(duckMother);
+		singleLinkedList.insert( linkedListDuck );
+	Collections::ArrayList arrayList;
+	for( int i=0; i<5; ++i )
+		arrayList.insert( arrayDuck );
 
-	// do some ducking
-	outputDucks(duckList);
+	// do some explicit ducking
+	reinterpret_cast<Duck*>(arrayList.get(1))->quack();
+	reinterpret_cast<Duck*>(arrayList.get(3))->quack();
 
-	// the wolf
-	std::cout << "The wolf attacks!\n";
-	Collections::SingleLinkedList reducedDuckList;
-	copyEverySecondObject(duckList, reducedDuckList);
+	// reset an element
+	arrayList.set(Duck("kuckuk!"), 3);
 
-	// do some ducking
-	outputDucks(reducedDuckList);
+	// output per iterator
+	outputDucks(arrayList);
+
+	// swap!
+	std::cout << "\nSwapping\n";
+	Collections::ArrayList arrayListFromLinkedList(singleLinkedList);
+	Collections::SingleLinkedList singleLinkedListFromArrayList(arrayList);
+
+	// output per loop
+	for(unsigned int i=0; i<arrayListFromLinkedList.getNumElements(); ++i)
+		reinterpret_cast<Duck*>(arrayList.get(i))->quack();
 
 	return 0;
 }
