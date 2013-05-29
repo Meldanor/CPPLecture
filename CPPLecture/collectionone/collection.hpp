@@ -14,6 +14,7 @@ namespace Collections
 		unsigned int m_numElements;
 
 		ICollection() : m_numElements(0)	{}
+        ICollection(const ICollection& collection);
 		// TODO: Copyconstructor?
 
 	public:
@@ -39,8 +40,6 @@ namespace Collections
 			/// \brief Access the current element without changing the iterator
 			///
 			virtual IElement* current() const = 0;
-
-			virtual ~IIterator();
 		};
 
 		/// \brief Creates a one-time iterator.

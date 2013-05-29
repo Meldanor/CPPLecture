@@ -18,7 +18,7 @@ namespace Collections
 		ListEntry* m_first;
 	public:
 		SingleLinkedList() : m_first(nullptr)		{}
-		// TODO: Copyconstructor
+        SingleLinkedList(const ICollection& list);
 
 		~SingleLinkedList();
 

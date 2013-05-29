@@ -12,6 +12,13 @@ namespace Collections
 		}
 	}
 
+    SingleLinkedList::SingleLinkedList(const ICollection& list) {
+        auto it = list.getIterator();
+        while(it->current()) {
+            this->insert(*(it->current()));
+            it->next();
+        }
+    }
 
 	// Inserts elements at the front of the list.
 	void SingleLinkedList::insert( const IElement& newElement )
@@ -34,7 +41,7 @@ namespace Collections
 	{
 		return m_current ? m_current->data : nullptr;
 	}
-
+    
 	// Creates a one-time iterator.
 	ICollection::IIterator* SingleLinkedList::getIterator() const
 	{
