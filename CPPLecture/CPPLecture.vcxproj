@@ -82,6 +82,8 @@
     <ClCompile Include="collectionone\duck.cpp" />
     <ClCompile Include="collectionone\list.cpp" />
     <ClCompile Include="collectionone\program.cpp" />
+    <ClCompile Include="mathvector\test.cpp" />
+    <ClCompile Include="mathvector\Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collectionone\arraylist.hpp" />
@@ -89,6 +91,7 @@
     <ClInclude Include="collectionone\duck.hpp" />
     <ClInclude Include="collectionone\element.hpp" />
     <ClInclude Include="collectionone\list.hpp" />
+    <ClInclude Include="mathvector\Vector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

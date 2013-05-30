@@ -16,7 +16,7 @@ void outputDucks(const Collections::ICollection& duckcollection)
 	delete it;
 }
 
-int main()
+int mainCollection()
 {
 	Duck linkedListDuck("quack->quack");
 	Duck arrayDuck("quackquack");
