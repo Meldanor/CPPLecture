@@ -46,7 +46,7 @@ int mainCollection()
 
 	// output per loop
 	for(unsigned int i=0; i<arrayListFromLinkedList.getNumElements(); ++i)
-		reinterpret_cast<Duck*>(arrayList.get(i))->quack();
+		reinterpret_cast<Duck*>(arrayListFromLinkedList.get(i))->quack();
 
 	return 0;
 }

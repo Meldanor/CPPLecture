@@ -7,7 +7,7 @@ namespace Collections {
     }
 
     ArrayList::ArrayList(const ICollection& list) {
-        initArrayList(8);
+		initArrayList(list.getNumElements());
         auto it = list.getIterator();
         while(it->current()) {
             this->insert(*(it->current()));
@@ -33,8 +33,10 @@ namespace Collections {
     }
 
 	void ArrayList::set(const IElement& newElement, unsigned int index) {
-        if (index < m_numElements)
+        if (index >= m_numElements)
             return;
+		if (elements[index] != nullptr)
+			delete elements[index];
         elements[index] = newElement.clone();
     }
 
