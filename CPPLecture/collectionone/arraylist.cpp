@@ -33,7 +33,7 @@ namespace Collections {
     }
 
 	void ArrayList::set(const IElement& newElement, unsigned int index) {
-        if (index < m_numElements)
+        if (index >= m_numElements)
             return;
         elements[index] = newElement.clone();
     }
