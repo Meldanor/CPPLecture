@@ -39,7 +39,6 @@ namespace Math {
 	/// \param index	
 	/// \return Reference to last element if index is invalid 
 	Vector::Element Vector::operator [] (unsigned int index) const {
-        // TODO: 
         return this->m_elements[index];
     }
 
@@ -77,11 +76,14 @@ namespace Math {
     }
 
     // Vector * Vector (scalar product, element wise multiplication, then sum)
-    Vector& Vector::operator * (Vector& vector) {
+    Vector::Element Vector::operator * (Vector& vector) {
         // error
         if (this->getNumElements() != vector.getNumElements())
-            return *this;
-        return *this;
+            return 0;
+		Element sum = 0.0f;
+		for (unsigned int i = 0 ; i < vector.getNumElements(); ++i) 
+			sum += m_elements[i] * vector[i];
+		return sum;
     }
 
     // Vector * Element

@@ -45,7 +45,7 @@ namespace Math
         // Vector - Vector
         Vector& operator - (Vector& vector);
         // Vector * Vector (scalar product, element wise multiplication, then sum)
-        Vector& operator * (Vector& vector);
+        Element operator * (Vector& vector);
         // Vector * Element
         Vector& operator * (Element vector);
 	private:
