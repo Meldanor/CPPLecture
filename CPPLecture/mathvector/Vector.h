@@ -60,5 +60,5 @@ namespace Math
     inline Vector operator * (Vector::Element left, Vector& right) { return right * left; }
 
     // std::ostream << Vector (output as formated text)
-    inline std::ostream& operator<< (std::ostream& out, const Vector& right);
+    std::ostream& operator<< (std::ostream& out, const Vector& right);
 }

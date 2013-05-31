@@ -1,5 +1,6 @@
 #include "Vector.h"
 
+#include <iostream>
 using namespace std;
 
 namespace Math {
@@ -97,7 +98,7 @@ namespace Math {
             left << right[i] << ", ";
         }
         if (right.getNumElements() > 0)
-            return left << right[right.getNumElements() - 1 ) << ")";
+            return left << right[right.getNumElements() - 1] << ")";
         else
             return left;
     }
