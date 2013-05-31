@@ -9,6 +9,7 @@ namespace Math {
         m_elements.reset(new Element[size]);
         for (unsigned int i = 0 ; i < size; ++i)
             m_elements[i] = value;
+		m_size = size;
     }
 
     /// Copy constructor.
@@ -16,6 +17,7 @@ namespace Math {
         m_elements.reset(new Element[vector.getNumElements()]);
         for (unsigned int i = 0 ; i < vector.getNumElements(); ++i)
             m_elements[i] = vector.m_elements[i];
+		m_size = vector.getNumElements();
     }
 
 	/// Destructor, releases allocated memory.
