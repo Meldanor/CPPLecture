@@ -15,9 +15,9 @@ namespace Math {
     /// Copy constructor.
 	Vector::Vector(const Vector& vector) {
         m_elements.reset(new Element[vector.getNumElements()]);
-        for (unsigned int i = 0 ; i < vector.getNumElements(); ++i)
+        m_size = vector.getNumElements();
+		for (unsigned int i = 0 ; i < vector.getNumElements(); ++i)
             m_elements[i] = vector.m_elements[i];
-		m_size = vector.getNumElements();
     }
 
 	/// Destructor, releases allocated memory.
