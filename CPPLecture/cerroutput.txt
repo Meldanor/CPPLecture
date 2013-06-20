@@ -1,8 +1,8 @@
 Your clock has 10000000 ticks per second
 
 Consumed time in    heavyWork2()   [d:\projekte\cpplecture\cpplecture\cpplecture\profiler\demo.cpp] :
-    2.0002 ms    [2.0002 ms]
+    2332.11 ms    [2332.11 ms]
 Consumed time in    heavyWork1()   [d:\projekte\cpplecture\cpplecture\cpplecture\profiler\demo.cpp] :
-    588.032 ms    [588.032 ms]
+    -4.72943e+014 ms    [-4.72943e+014 ms]
 Consumed time in    main()   [d:\projekte\cpplecture\cpplecture\cpplecture\profiler\demo.cpp] :
-    932.053 ms    [932.053 ms]
+    7.0003 ms    [7.0003 ms]

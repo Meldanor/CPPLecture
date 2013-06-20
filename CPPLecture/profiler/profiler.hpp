@@ -24,12 +24,13 @@ namespace Prof {
 		Ticks pop( const Ticks& functionTime );
 
 		/// \brief Singleton access.
-		ProfileStack instance();
+		static ProfileStack& getInstance();
+
 
 	private:
-		std::stack<Ticks> m_TimeStack;
+		static ProfileStack* instance;
 
-		static ProfileStack INSTANCE;
+		std::stack<Ticks> m_TimeStack;
 
 		ProfileStack() {};
 	};
