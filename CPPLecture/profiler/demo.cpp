@@ -19,7 +19,7 @@ int heavyWork2( int n )
 }
 
 
-int main()
+int mainProfiler()
 {
 	PROFILE
 	FILE* stream;
