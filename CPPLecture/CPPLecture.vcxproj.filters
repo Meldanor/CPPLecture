@@ -39,6 +39,15 @@
     <ClCompile Include="profiler\profiler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="factory\Fleet.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factory\Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="factory\SpaceShipFactory.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="collectionone\collection.hpp">
@@ -60,6 +69,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="profiler\profiler.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="factory\Fleet.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="factory\SpaceShipFactory.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="factory\SpaceShips.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
