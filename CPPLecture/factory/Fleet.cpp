@@ -4,12 +4,17 @@
 #include <fstream>
 #include <assert.h>
 #include <sstream>
+#include <iostream>
 
 Fleet::Fleet(const std::string& fleetFilename) {
 
     std::ifstream myfile;
     myfile.open(fleetFilename);
     std::string line;
+	if (!myfile.good()) {
+		std::cout << "File not found!" << std::endl;
+		return;
+	}
     while(myfile.good()) {
         getline(myfile,line);
         std::istringstream tmp(line);

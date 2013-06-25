@@ -8,6 +8,9 @@
 
 
 void SpaceShipFactory::registerSpaceShip(const std::string& spaceShipTypeName, const CreateSpaceShipFunc& createSpaceShipFunc) {
+	if (m_createSpaceShipFuncRegister.find(spaceShipTypeName) != m_createSpaceShipFuncRegister.end()) {
+		throw "double name!";
+	}
     std::pair<std::string,CreateSpaceShipFunc> tmp (spaceShipTypeName, createSpaceShipFunc);
     m_createSpaceShipFuncRegister.insert(tmp);
 }

@@ -2,6 +2,7 @@
 #include "SpaceShips.h"
 #include "Fleet.h"
 #include <sstream>
+#include <iostream>
 
 int main()
 {
