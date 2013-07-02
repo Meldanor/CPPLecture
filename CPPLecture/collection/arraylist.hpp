@@ -18,7 +18,7 @@ namespace Collections {
             array = new T[capacity];
         }
 
-        ArrayList(ICollection& collection) {
+        ArrayList(const ICollection& collection) {
             m_numElements = 0;
             capacity = collection.getNumElements() * 2;
             array = new T[capacity];
@@ -51,7 +51,11 @@ namespace Collections {
             array[m_numElements++] = newElement;
         }
 
-        T& ArrayList::operator[](unsigned int const index) {
+        T& operator[](unsigned int index) {
+            return array[index];
+        }
+
+        const T& operator[](unsigned int index) const {
             return array[index];
         }
 
