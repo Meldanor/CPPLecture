@@ -4,7 +4,7 @@
 #include <sstream>
 #include <iostream>
 
-int main()
+int mainFleet()
 {
 	// Register SpaceShips by using the SpaceShipFactory::getInstance().registerSpaceShip with lambda functions.
 
@@ -55,4 +55,6 @@ int main()
     SpaceShipFactory::getInstance().registerSpaceShip("LargeDestroyer", largeDestroyer);
 	// Loads fleet from file
 	Fleet imperialFleet("imperialships.txt");
+
+    return 0;
 }

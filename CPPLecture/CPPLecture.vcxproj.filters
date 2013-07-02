@@ -15,18 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="collectionone\duck.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="collectionone\list.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="collectionone\program.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="collectionone\arraylist.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="mathvector\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,21 +36,15 @@
     <ClCompile Include="factory\SpaceShipFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="collection\duck.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="collection\program.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="collectionone\collection.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="collectionone\duck.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="collectionone\element.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="collectionone\list.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="collectionone\arraylist.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="mathvector\Vector.h">
@@ -78,6 +60,15 @@
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="factory\SpaceShips.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collection\arraylist.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collection\collection.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="collection\duck.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

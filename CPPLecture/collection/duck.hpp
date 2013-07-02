@@ -1,15 +1,17 @@
 #pragma once
 
-#include "element.hpp"
 #include <string>
 
 /**
 * A sweet quacking, probably yellow, duck.
 * Does duck things.
 */
-class Duck : public Collections::IElement
+class Duck
 {
 public:
+	Duck() : m_quacking("")
+	{}
+
 	Duck(const std::string& quackingPhrase) : 
 		m_quacking(quackingPhrase)
 	{}
@@ -18,10 +20,8 @@ public:
 	///
 	void quack() const;
 
-	/// \brief Create a copy of this duck on the heap (new).
-	///
-	virtual IElement* clone() const override;
+	const Duck& operator=( const Duck& right );
 
 private:
-	const std::string m_quacking;
+	std::string m_quacking;
 };

@@ -8,8 +8,9 @@ void Duck::quack() const
 	std::cout << m_quacking << std::endl;
 }
 
-// Create a copy of this duck on the heap (new).
-Collections::IElement* Duck::clone() const
+// Assignment required
+const Duck& Duck::operator=( const Duck& right )
 {
-	return new Duck(m_quacking);
+	m_quacking = right.m_quacking;
+	return *this;
 }
