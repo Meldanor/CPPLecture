@@ -1,7 +1,7 @@
 #include "Vector.h"
 #include <iostream>
 
-int mainVector()
+int main()
 {
 	Math::Vector a(5, 0.5f);
 
@@ -25,6 +25,4 @@ int mainVector()
 
 	Math::Vector f = 10 * a;
 	std::cout << "f = 10 * a: " << f << std::endl;
-
-	return 0;
 }

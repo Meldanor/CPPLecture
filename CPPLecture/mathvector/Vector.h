@@ -20,7 +20,7 @@ namespace Math
 		Vector(const Vector& vector);
 
 		/// Destructor, releases allocated memory.
-		~Vector();
+        ~Vector() {}
 
 		/// Returns number of elements
 		unsigned int getNumElements() const { return m_size; }
@@ -40,25 +40,33 @@ namespace Math
 		/// \return Reference to last element if index is invalid
 		Element& operator [] (unsigned int index);
 
-        // Vector + Vector
-        Vector& operator + (Vector& vector);
-        // Vector - Vector
-        Vector& operator - (Vector& vector);
-        // Vector * Vector (scalar product, element wise multiplication, then sum)
-        Element operator * (Vector& vector);
-        // Vector * Element
-        Vector& operator * (Element vector);
+		// TODO: Insert additional Operators (here or global where necessary)
+		// -> Use const wherever possible and useful!
+		// -> Where possible use methods in favor of global functions!
+		//
+		// Vector + Vector
+        Vector operator +(const Vector& right);
+		// Vector - Vector
+        Vector operator -(const Vector& right);		
+		// Vector * Element
+        Vector operator *(const Element& right);
+		// Vector * Vector (scalar product, element wise multiplication, then sum)
+        Element operator *(const Vector& right);
+		// std::ostream << Vector (output as formated text)
+
 	private:
 		/// intern element array
 		std::unique_ptr<Element[]> m_elements;
 
 		/// number of elements
 		unsigned int m_size;
+
+        const Vector& getMin(const Vector& v1, const Vector& v2) const;
+        const Vector& getMax(const Vector& v1, const Vector& v2) const;
 	};
 
     // Element * Vector
     inline Vector operator * (Vector::Element left, Vector& right) { return right * left; }
 
-    // std::ostream << Vector (output as formated text)
     std::ostream& operator<< (std::ostream& out, const Vector& right);
 }

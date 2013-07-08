@@ -1,109 +1,107 @@
 #include "Vector.h"
+#include <ostream>
 
-#include <iostream>
-using namespace std;
-
-namespace Math {
-
-    Vector::Vector(unsigned int size, Element value) {
-        m_elements.reset(new Element[size]);
-        for (unsigned int i = 0 ; i < size; ++i)
-            m_elements[i] = value;
-		m_size = size;
-    }
-
-    /// Copy constructor.
-	Vector::Vector(const Vector& vector) {
-        m_elements.reset(new Element[vector.getNumElements()]);
-        m_size = vector.getNumElements();
-		for (unsigned int i = 0 ; i < vector.getNumElements(); ++i)
-            m_elements[i] = vector.m_elements[i];
-    }
-
-	/// Destructor, releases allocated memory.
-	Vector::~Vector() {
-        m_elements.release();
-    }
-
-	/// Destroys content of this instance and copies all data from the right one
-	/// \param right	assigned Math::Vector
-	/// \return Reference to this
-	Vector& Vector::operator = (const Vector& right) {
-        m_elements.reset(new Element[right.getNumElements()]);
-        for (unsigned int i = 0 ; i < right.getNumElements(); ++i)
-            m_elements[i] = right.m_elements[i];
-        return *this;
-    }
-
-	/// Returns element at a given position.
-	/// \param index	
-	/// \return Reference to last element if index is invalid 
-	Vector::Element Vector::operator [] (unsigned int index) const {
-        return this->m_elements[index];
-    }
-
-	/// Returns reference to element at a given position.
-	/// \param index	
-	/// \return Reference to last element if index is invalid
-	Vector::Element& Vector::operator [] (unsigned int index) {
-        return this->m_elements[index];
-    }
-
-    // Vector + Vector
-    Vector& Vector::operator + (Vector& vector) {
-        // Error - different length
-        if (this->getNumElements() != vector.getNumElements())
-            return *this;
-
-        // Add components of vector
-        for (unsigned int i = 0 ; i < this->getNumElements() ; ++i)
-            this->m_elements[i] += vector.m_elements[i];
-
-        return *this;
-    }
-
-    // Vector - Vector
-    Vector& Vector::operator - (Vector& vector) {
-        // Error - different length
-        if (this->getNumElements() != vector.getNumElements())
-            return *this;
-
-        // Add components of vector
-        for (unsigned int i = 0 ; i < this->getNumElements() ; ++i)
-            this->m_elements[i] -= vector.m_elements[i];
-
-        return *this;
-    }
-
-    // Vector * Vector (scalar product, element wise multiplication, then sum)
-    Vector::Element Vector::operator * (Vector& vector) {
-        // error
-        if (this->getNumElements() != vector.getNumElements())
-            return 0;
-		Element sum = 0.0f;
-		for (unsigned int i = 0 ; i < vector.getNumElements(); ++i) 
-			sum += m_elements[i] * vector[i];
-		return sum;
-    }
-
-    // Vector * Element
-    Vector& Vector::operator * (Vector::Element scalar) {
-        // Multiply components with the scalar
-        for (unsigned int i = 0 ; i < this->getNumElements() ; ++i)
-            this->m_elements[i] *= scalar;
-
-        return *this;
-    }
-
-    // std::ostream << Vector (output as formated text)
-    ostream& operator<< (ostream& left, const Vector& right) {
-        left << "(";
-        for (unsigned int i = 0 ; i < right.getNumElements() -1 ; ++i) {
-            left << right[i] << ", ";
+namespace Math
+{
+    	/// Create empty from size, filled with a given value.
+		/// \param size		vectors size
+		/// \param value	value applied to all elements
+        Vector::Vector(unsigned int size, Vector::Element value) : m_size(size) {
+            this->m_elements.reset(new Element[m_size]);
+            for (unsigned int i = 0 ; i< m_size ; ++i)
+                m_elements[i] = value;
         }
-        if (right.getNumElements() > 0)
-            return left << right[right.getNumElements() - 1] << ")";
-        else
+
+		/// Copy constructor.
+        Vector::Vector(const Vector& vector) : m_size(vector.getNumElements()) {
+            m_elements.reset(new Element[m_size]);
+            for (unsigned int i = 0; i < m_size; ++i) {
+                m_elements[i] = vector.m_elements[i];
+            }
+        }
+		
+		/// Destroys content of this instance and copies all data from the right one
+		/// \param right	assigned Math::Vector
+		/// \return Reference to this
+		Vector& Vector::operator = (const Vector& right) {
+            this->m_elements.reset(right.m_elements.get());
+            this->m_size = right.m_size;
+            return *this;
+        }
+
+		/// Returns element at a given position.
+		/// \param index	
+		/// \return Reference to last element if index is invalid 
+		Vector::Element Vector::operator [] (unsigned int index) const {
+            return m_elements[index];
+        }
+
+		/// Returns reference to element at a given position.
+		/// \param index	
+		/// \return Reference to last element if index is invalid
+		Vector::Element& Vector::operator [] (unsigned int index) {
+            return m_elements[index];
+        }
+
+		// TODO: Insert additional Operators (here or global where necessary)
+		// -> Use const wherever possible and useful!
+		// -> Where possible use methods in favor of global functions!
+		//
+		// Vector + Vector
+        Vector Vector::operator +(const Vector& right) {
+            const Vector& max = getMax(*this, right);
+            const Vector& min = getMin(*this, right);
+            Vector tmp(max.getNumElements());
+            for (unsigned int i = 0 ; i < min.getNumElements(); ++i)
+                tmp[i] = this->m_elements[i] + right[i];
+            return tmp;
+        }
+
+		// Vector - Vector
+        Vector Vector::operator -(const Vector& right) {
+            const Vector& max = getMax(*this, right);
+            const Vector& min = getMin(*this, right);
+            Vector tmp(max.getNumElements());
+            for (unsigned int i = 0 ; i < min.getNumElements(); ++i)
+                tmp[i] = this->m_elements[i] - right[i];
+            return tmp;
+        }
+
+		// Vector * Element
+        Vector Vector::operator *(const Element& right) {
+            Vector tmp(*this);
+            for (unsigned int i = 0 ; i < tmp.getNumElements(); ++i)
+                tmp[i] *= right;
+            return tmp;
+        }
+
+		// Vector * Vector (scalar product, element wise multiplication, then sum)
+        Vector::Element Vector::operator *(const Vector& right) {
+            Element sum = 0;
+            const Vector& max = getMax(*this, right);
+            const Vector& min = getMin(*this, right);
+            unsigned int i = 0;
+            for (i = 0 ; i < min.getNumElements() ; ++i)
+                sum += (min[i] * max[i]);
+            for (; i < max.getNumElements() ; ++i)
+                sum += max[i];
+            return sum;
+        }
+
+        const Vector& Vector::getMin(const Vector &v1, const Vector& v2) const {
+            return v1.m_size < v2.m_size ? v1 : v2;
+        }
+
+        const Vector& Vector::getMax(const Vector& v1, const Vector& v2) const {
+            return v1.m_size > v2.m_size ? v1 : v2;
+        }
+
+        // std::ostream << Vector (output as formated text)
+        std::ostream& operator<<(std::ostream& left, const Vector& right) {
+            left << "Vector(" << right.getNumElements() << "): ";
+            for (unsigned int i = 0 ; i < right.getNumElements(); ++i)
+                left << right[i] << ' ';
+
             return left;
-    }
+        }
 }

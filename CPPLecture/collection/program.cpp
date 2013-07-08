@@ -14,7 +14,7 @@ void outputDucks(const Collections::ICollection<Duck>& duckcollection)
     }
 }
 
-int main()
+int mainCollection3()
 {
     Duck alphaDuck("quack->quack");
     Duck arrayDuck("quackquack");
