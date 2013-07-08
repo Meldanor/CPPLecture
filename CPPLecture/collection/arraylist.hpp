@@ -15,13 +15,13 @@ namespace Collections {
         ArrayList() {
             m_numElements = 0;
             capacity = 16;
-            array = new T[capacity];
+            elements.reset(new T[capacity]);
         }
 
         ArrayList(const ICollection& collection) {
             m_numElements = 0;
             capacity = collection.getNumElements() * 2;
-            array = new T[capacity];
+            elements.reset(new T[capacity]);
 
             auto it = collection.getIterator();
             while(it->current())
@@ -31,32 +31,30 @@ namespace Collections {
             }
         }
 
-        virtual ~ArrayList() {
-            delete[] array;
-        }
+        virtual ~ArrayList() { }
 
         void resize( unsigned int numInstances ) {
+            std::unique_ptr<T[]> tmp(new T[numInstances]);
             T* newArray = new T[numInstances];
             for (unsigned int i = 0; i < m_numElements ; ++i) {
-                newArray[i] = array[i];
+                tmp[i] = elements[i];
             }
-            delete[] array;
-            array = newArray;
+            elements.swap(tmp);
             capacity = numInstances;
         }
 
         virtual void insert( const T& newElement ) override {
             if (m_numElements == capacity)
                 resize(capacity * 2);
-            array[m_numElements++] = newElement;
+            elements[m_numElements++] = newElement;
         }
 
         T& operator[](unsigned int index) {
-            return array[index];
+            return elements[index];
         }
 
         const T& operator[](unsigned int index) const {
-            return array[index];
+            return elements[index];
         }
 
         class Iterator: public ICollection<T>::IIterator {
@@ -88,11 +86,11 @@ namespace Collections {
         };
 
         virtual std::shared_ptr<typename ICollection<T>::IIterator> getIterator() const override {
-            return std::make_shared<Iterator>(array, m_numElements);
+            return std::make_shared<Iterator>(elements.get(), m_numElements);
         }
 
     private:
-        T* array;
+        std::unique_ptr<T[]> elements;
         unsigned int capacity;
     };
 };
